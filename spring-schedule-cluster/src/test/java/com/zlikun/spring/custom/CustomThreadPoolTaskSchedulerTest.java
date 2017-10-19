@@ -28,7 +28,7 @@ public class CustomThreadPoolTaskSchedulerTest {
         // 找到执行调度的地方，实现集群控制！！！
         scheduler.schedule(() -> {
             log.info("执行调度!");
-        } ,new CronTrigger("0/15 * * * * ?")) ;
+        } ,new CronTrigger("0/5 * * * * ?")) ;
 
         Thread.currentThread().join(60000);
 

@@ -340,7 +340,6 @@ public class CustomThreadPoolTaskScheduler extends ExecutorConfigurationSupport
         return TaskUtils.decorateTaskWithErrorHandler(task, this.errorHandler, isRepeatingTask);
     }
 
-
     private static class DelegatingErrorHandlingCallable<V> implements Callable<V> {
 
         private final Callable<V> delegate;
@@ -400,6 +399,9 @@ public class CustomThreadPoolTaskScheduler extends ExecutorConfigurationSupport
 
         @Override
         public void run() {
+            // TODO 在这里控制集群(但不是好的选择，期望可以找到更上层的逻辑)
+            log.info("start execute task ...");
+
             Date actualExecutionTime = new Date();
             super.run();
             Date completionTime = new Date();
