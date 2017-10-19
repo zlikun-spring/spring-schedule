@@ -17,7 +17,7 @@ public class SimpleTask {
     /**
      * 每3秒执行一次任务
      */
-//    @Scheduled(fixedRate = 3000)
+    @Scheduled(fixedRate = 3000)
     public void task_1() {
         log.info("执行任务-1");
     }
@@ -32,7 +32,7 @@ public class SimpleTask {
      * 10:29:59.400 begin (相对于上次完成时间间隔0秒，由于上次任务执行完成时，第二次任务开始时间已经过了或者刚好开始，所以立即开始了)
      * 10:30:04.401 end (相对于开始时间间隔5秒，程序执行耗时5秒)
      */
-//    @Scheduled(fixedRate = 3000 ,initialDelay = 5000)
+    @Scheduled(fixedRate = 3000 ,initialDelay = 5000)
     public void task_2() throws InterruptedException {
         String uuid = UUID.randomUUID().toString() ;
         log.info("执行任务-2-begin-\t" + uuid);
@@ -53,7 +53,7 @@ public class SimpleTask {
      * 10:21:01.699 end (第二次执行完成时间相对于开始时间间隔3秒)
      * @throws InterruptedException
      */
-//    @Scheduled(fixedDelay = 2000)
+    @Scheduled(fixedDelay = 2000)
     public void task_3() throws InterruptedException {
         String uuid = UUID.randomUUID().toString() ;
         log.info("执行任务-3-begin-\t" + uuid);
@@ -102,7 +102,7 @@ public class SimpleTask {
      * 11:44:24.000 begin (间隔上次任务开始时间6秒，中间有一次任务被忽略了，该任务的开始时间在上次任务执行过程中出现)
      * 11:44:29.001 end (执行耗时5秒)
      */
-//    @Scheduled(cron = "0/3 * * * * ?")
+    @Scheduled(cron = "0/3 * * * * ?")
     public void task_4() throws InterruptedException {
         String uuid = UUID.randomUUID().toString() ;
         log.info("执行任务-4-begin-\t" + uuid);

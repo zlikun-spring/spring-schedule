@@ -42,9 +42,9 @@ public class HelloServiceTest {
         }
     }
 
-    @Test
-    public void update() {
-        helloService.update();
-    }
+//    @Test
+//    public void update() {
+//        helloService.update();
+//    }
 
 }
