@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
-import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
+import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import javax.sql.DataSource;
@@ -22,19 +22,30 @@ import javax.sql.DataSource;
 @EnableScheduling
 public class QuartzConfigure {
 
-    /**
-     * 配置任务实例
-     * @return
-     */
+//    /**
+//     * 配置任务实例
+//     * @return
+//     */
+//    @Bean
+//    public MethodInvokingJobDetailFactoryBean jobDetailFactory() {
+//        MethodInvokingJobDetailFactoryBean factory = new MethodInvokingJobDetailFactoryBean() ;
+//        factory.setName("simple-job");
+//        // 禁用并发，表示等上一任务执行完成才执行下一个任务
+//        factory.setConcurrent(false);
+//        factory.setTargetObject(new SimpleJob());
+//        factory.setTargetMethod("execute");
+//        factory.setArguments("zlikun" ,120);
+//        return factory ;
+//    }
+
     @Bean
-    public MethodInvokingJobDetailFactoryBean jobDetailFactory() {
-        MethodInvokingJobDetailFactoryBean factory = new MethodInvokingJobDetailFactoryBean() ;
-        factory.setName("simple-job");
-        // 禁用并发，表示等上一任务执行完成才执行下一个任务
-        factory.setConcurrent(false);
-        factory.setTargetObject(new SimpleJob());
-        factory.setTargetMethod("execute");
-        factory.setArguments("zlikun" ,120);
+    public JobDetailFactoryBean jobDetailFactory() {
+        JobDetailFactoryBean factory = new JobDetailFactoryBean() ;
+        // 配置作业名称
+        factory.setName("simple");
+        // 配置持久化
+        factory.setDurability(true);
+        factory.setJobClass(SimpleJob.class);
         return factory ;
     }
 
@@ -52,6 +63,9 @@ public class QuartzConfigure {
         return factory ;
     }
 
+    @Autowired
+    DataSource dataSource ;
+
     @Bean
     public SchedulerFactoryBean schedulerFactory(ThreadPoolTaskExecutor executor ,CronTrigger cronTrigger) {
         SchedulerFactoryBean factory = new SchedulerFactoryBean() ;
@@ -59,6 +73,8 @@ public class QuartzConfigure {
         // 受SchedulerFactoryBean类239行代码影响，默认线程池大小为10
         // 通过修改TaskExecutor调整线程池大小(也可能通过修改quartz.properties配置文件实现)，该项配置非必要
         factory.setTaskExecutor(executor);
+        // 配置数据源
+        factory.setDataSource(dataSource);
         return factory ;
     }
 
