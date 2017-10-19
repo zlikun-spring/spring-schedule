@@ -4,15 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zlikun.spring</groupId>
-    <artifactId>spring-scheduling</artifactId>
+    <artifactId>spring-schedule</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>spring-scheduling</name>
+    <name>spring-schedule</name>
     <description>Spring任务及调度</description>
 
     <modules>
-        <module>spring-scheduling-usage</module>
+        <module>spring-schedule-usage</module>
     </modules>
 
     <parent>
