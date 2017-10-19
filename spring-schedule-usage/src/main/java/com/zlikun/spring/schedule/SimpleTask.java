@@ -69,7 +69,7 @@ public class SimpleTask {
      * 4、天 0 ~ 30 ，取值范围与所属月分有关
      * 5、月 0 ~ 11
      * 6、周 1 ~ 7，或：SUN，MON，TUE，WED，THU，FRI，SAT
-     * 7、年 1970 ~ 2099，可以省略
+     * 7、年 1970 ~ 2099，可以省略(Spring-4.x已不支持该项了)
      * 每个部分配置方式
      * 1、单个数值，如：3
      * 2、连续区间，如：2-5
@@ -102,7 +102,7 @@ public class SimpleTask {
      * 11:44:24.000 begin (间隔上次任务开始时间6秒，中间有一次任务被忽略了，该任务的开始时间在上次任务执行过程中出现)
      * 11:44:29.001 end (执行耗时5秒)
      */
-    @Scheduled(cron = "0/3 * * * * ?")
+//    @Scheduled(cron = "0/3 * * * * ?")
     public void task_4() throws InterruptedException {
         String uuid = UUID.randomUUID().toString() ;
         log.info("执行任务-4-begin-\t" + uuid);
